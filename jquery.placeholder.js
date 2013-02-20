@@ -65,6 +65,20 @@
 		isInputSupported || (valHooks.input = hooks);
 		isTextareaSupported || (valHooks.textarea = hooks);
 
+		$.attrHooks.placeholder = {
+			set: function(element, value){
+				var $element = $(element),
+					currentPlaceholder = $element.attr('placeholder');
+
+				// Update element value if it should contain a placeholder.
+				if ((element.value == currentPlaceholder) && $element.data('placeholder-enabled') && $element.hasClass('placeholder')) {
+					element.value = value;
+				}
+				element.setAttribute('placeholder', value);
+				return value;
+			}
+		};
+
 		$(function() {
 			// Look for forms
 			$(document).delegate('form', 'submit.placeholder', function() {

@@ -26,6 +26,7 @@
    <p><label><code>type=tel</code> <input type="tel" name="tel" placeholder="e.g. +32 472 77 69 88"></label></p>
    <p><label for="p"><code>type=password</code> </label><input type="password" name="password" placeholder="e.g. hunter2" id="p"></p>
    <p><label><code>textarea</code> <textarea name="message" placeholder="Your message goes here"></textarea></label></p>
+   <p><label for="c"><code>onchange</code></label><input type="text" name="change" placeholder="Placeholder 1" id="c"><button>...</button></p>
    <p><input type="submit" value="type=submit"></p>
   </form>
   <p>— <a href="http://mathiasbynens.be/" title="Mathias Bynens, front-end developer">Mathias</a></p>
@@ -36,6 +37,12 @@
    // $.fn.hide = function() { return this; }
    // Then uncomment the last rule in the <style> element (in the <head>).
    $(function() {
+    // Change placeholder every time button is clicked.
+    $('button').click(function(){
+      var count = parseInt($('#c').attr('placeholder').split(' ')[1]) + 1;
+      $('#c').attr('placeholder', 'Placeholder ' + count);
+      return false;
+    });
     // Invoke the plugin
     $('input, textarea').placeholder();
     // That’s it, really.
